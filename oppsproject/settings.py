@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1oegd2uu(-+ytj^t3&*_ub*u@xu-nse2v8jfjv@so$j^@vg*5i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'drf_yasg',
     
     'rest_framework_swagger',
     
@@ -89,7 +90,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'oppsproject.wsgi.application'
 
-
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
