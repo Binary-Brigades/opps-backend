@@ -1,5 +1,7 @@
 
 from pathlib import Path
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,11 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1oegd2uu(-+ytj^t3&*_ub*u@xu-nse2v8jfjv@so$j^@vg*5i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-
+DATABASE_URL = 'postgres://admin:EL99mLVDPzNFztR2HSC2vLn6vEedCZer@dpg-cm3benmn7f5s73bn0at0-a.oregon-postgres.render.com/opps'
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,10 +93,11 @@ WSGI_APPLICATION = 'oppsproject.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=True ,  # Set the SSL mode to 'require'
+    )
 }
 
 
