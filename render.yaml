@@ -1,0 +1,9 @@
+services:
+  - name: web
+    envVars:
+      DJANGO_SETTINGS_MODULE: "oppsproject.settings"
+    buildCommand: python manage.py migrate
+    startCommand: gunicorn oppsproject.wsgi:application -b 0.0.0.0:$PORT
+  - name: static
+    buildCommand: python manage.py collectstatic --noinput
+    staticPublishPath: "/static"
