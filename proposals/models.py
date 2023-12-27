@@ -21,6 +21,7 @@ class Question(models.Model):
     question = models.CharField(max_length=255)
     template = models.ForeignKey(Template,on_delete=models.CASCADE)
     marks = models.IntegerField()
+    max_words = models.IntegerField()
     
     def __str__(self):
         return self.question
