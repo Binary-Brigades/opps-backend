@@ -21,7 +21,8 @@ class TemplateViewSet(ModelViewSet):
  
 @api_view(['POST'])
 def create_proposal(request):
-    """creates a proposal with the user making the request
+    """
+    creates a proposal with the user making the request
 
     Args:
         template: a unique id of a template
