@@ -20,6 +20,7 @@ urlpatterns = [
     path('api/v1/docs/', schema_view.with_ui('redoc', cache_timeout=0),
          name='schema-swagger-ui'),
     path('api/v1/proposal/', include('proposals.urls')),
+    path('api/v1/user/', include('users.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
