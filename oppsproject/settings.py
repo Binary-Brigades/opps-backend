@@ -66,6 +66,11 @@ ROOT_URLCONF = 'oppsproject.urls'
 
 REST_USE_JWT = True
 
+CORS_ALLOWED_ORIGINS = ['https://opps-frontend.vercel.app','https://b4p4f8wp-5173.uks1.devtunnels.ms']
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "https://your-production-domain.com",
+]
 
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -103,12 +108,25 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=DATABASE_URL,
-        conn_max_age=600,
-        ssl_require=True ,  # Set the SSL mode to 'require'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'opps',
+        'USER': 'admin',
+        'PASSWORD': 'EL99mLVDPzNFztR2HSC2vLn6vEedCZer',
+        'HOST': 'dpg-cm3benmn7f5s73bn0at0-a.oregon-postgres.render.com',
+        'PORT': '5432',  # Default PostgreSQL port
+    }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'oppsdb',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',  # Default PostgreSQL port
+#     }
+# }
 
 
 # Password validation
@@ -130,13 +148,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_ATHENTICATION_CLASSES":[
+    "DEFAULT_AUTHENTICATION_CLASSES":[
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.AllowAny',
     ],
-    'USER_DETAILS_SERILIZER':'users.serializers.UserDetailSerializer',
+    'USER_DETAILS_SERIALIZER':'users.serializers.UserDetailsSerializer',
     'REST_AUTH_SERIALIZERS':'users.serializers.CustomLoginSerializer',
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
