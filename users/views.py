@@ -8,11 +8,14 @@ from .models import User
 
 @api_view(['GET'])
 def get_user_details(request):
-    userId = request.user.id
-    user = User.objects.get(id=userId)
-    serializer = UserDetailsSerializer(user)
-    print()
-    return Response(serializer.data)
+    try:
+        userId = request.user.id
+        user = User.objects.get(id=userId)
+        serializer = UserDetailsSerializer(user)
+        return Response(serializer.data)
+    except User.DoesNotExist:
+        return Response({'error':'user does not exist'})
+    
 
 
     
