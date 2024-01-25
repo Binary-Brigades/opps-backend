@@ -12,7 +12,7 @@ def get_user_details(request):
     user = User.objects.get(id=userId)
     serializer = UserDetailsSerializer(user)
     print()
-    return Response({serializer.data})
+    return Response(serializer.data)
 
 
     
