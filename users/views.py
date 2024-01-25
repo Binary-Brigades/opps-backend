@@ -8,6 +8,7 @@ from .models import User
 
 @api_view(['GET'])
 def get_user_details(request):
+    print(request.user)
     try:
         userId = request.user.id
         user = User.objects.get(id=userId)
