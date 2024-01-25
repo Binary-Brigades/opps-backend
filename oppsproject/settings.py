@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'USER_DETAILS_SERIALIZER':'users.serializers.UserDetailsSerializer',
     'REST_AUTH_SERIALIZERS':'users.serializers.CustomLoginSerializer',
