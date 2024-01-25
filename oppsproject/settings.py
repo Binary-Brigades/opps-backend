@@ -66,7 +66,7 @@ ROOT_URLCONF = 'oppsproject.urls'
 
 REST_USE_JWT = True
 
-CORS_ALLOWED_ORIGINS = ['https://opps-frontend.vercel.app','https://b4p4f8wp-5173.uks1.devtunnels.ms']
+CORS_ALLOWED_ORIGINS = ['https://opps-frontend.vercel.app','https://b4p4f8wp-5173.uks1.devtunnels.ms','http://localhost:5173','http://localhost:5174']
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://your-production-domain.com",
