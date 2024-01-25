@@ -107,26 +107,26 @@ SWAGGER_SETTINGS = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'opps',
-        'USER': 'admin',
-        'PASSWORD': 'EL99mLVDPzNFztR2HSC2vLn6vEedCZer',
-        'HOST': 'dpg-cm3benmn7f5s73bn0at0-a.oregon-postgres.render.com',
-        'PORT': '5432',  # Default PostgreSQL port
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'oppsdb',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '3306',  # Default PostgreSQL port
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'opps',
+#         'USER': 'admin',
+#         'PASSWORD': 'EL99mLVDPzNFztR2HSC2vLn6vEedCZer',
+#         'HOST': 'dpg-cm3benmn7f5s73bn0at0-a.oregon-postgres.render.com',
+#         'PORT': '5432',  # Default PostgreSQL port
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'oppsdb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',  # Default PostgreSQL port
+    }
+}
 
 
 # Password validation
@@ -153,7 +153,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'USER_DETAILS_SERIALIZER':'users.serializers.UserDetailsSerializer',
     'REST_AUTH_SERIALIZERS':'users.serializers.CustomLoginSerializer',
