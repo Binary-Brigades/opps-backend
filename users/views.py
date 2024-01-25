@@ -17,6 +17,7 @@ def get_user_details(request):
     except User.DoesNotExist:
         return Response({'error':'user does not exist'})
     
+    
 
 
     
