@@ -18,7 +18,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-DATABASE_URL = 'postgres://admin:EL99mLVDPzNFztR2HSC2vLn6vEedCZer@dpg-cm3benmn7f5s73bn0at0-a.oregon-postgres.render.com/opps'
 # Application definition
 
 INSTALLED_APPS = [
@@ -129,6 +128,7 @@ DATABASES = {
 # }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -149,10 +149,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES":[
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'USER_DETAILS_SERIALIZER':'users.serializers.UserDetailsSerializer',
     'REST_AUTH_SERIALIZERS':'users.serializers.CustomLoginSerializer',
