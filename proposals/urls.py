@@ -12,6 +12,7 @@ urlpatterns = [
     path('assign/',views.AssignmentApiView.as_view(),name='assign_proposals'),
     path('reviewers/',views.assign_proposal,name='assign_proposals'),
     path('add_proposal/answer/',views.add_answers,name='answer'),
+    path('proposal_statistics/', views.proposal_statistics, name = 'proposal_statistics'),
     path('preview_proposal/<str:id>/',views.view_my_proposal_answers,name='preview-answers'),
     path('get_questions/<str:id>/',views.get_questions,name='questions'),
     path('create_questions/<str:tempid>/',views.createQuestions,name='questions_create'),

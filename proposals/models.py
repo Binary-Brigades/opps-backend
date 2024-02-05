@@ -31,6 +31,7 @@ class Proposal(models.Model):
     proposer = models.ForeignKey(User,on_delete=models.CASCADE)
     created_on =models.DateField(auto_now_add=True)
     status = models.CharField(max_length=20,choices=STATUS,default='pending')
+    name = models.CharField(max_length = 255, blank = True)
     
     class Meta:
         unique_together = ('template','proposer')
