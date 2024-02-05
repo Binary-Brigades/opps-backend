@@ -11,7 +11,7 @@ schema_view = get_schema_view(
         title="OOPS API Documentation",
         default_version='v1',
     ),
-)
+) 
 
 urlpatterns = [
     path('admin/', admin.site.urls),

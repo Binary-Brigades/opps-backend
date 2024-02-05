@@ -42,7 +42,7 @@ def create_proposal(request):
     operation_description='returns a list of proposals created by the user'
 )
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def get_my_proposals(request):
     proposals = models.Proposal.objects.filter(proposer=request.user.id)
     serializer = serializers.ProposalSerializer(proposals,many=True)
@@ -176,7 +176,7 @@ def add_review(request,id):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
-    return Response(serializer.errrors)    
+    return Response(serializer.errors)    
 
 @swagger_auto_schema(
     method='POST',
@@ -207,3 +207,9 @@ def add_answers(request):
         return Response(serializers.data)
     return Response(serializers.errors)
     
+@api_view()
+def proposal_statistics(request):
+    pending_proposals_count = models.Proposal.objects.filter(status = "pending").count()
+    approved_proposals_count = models.Proposal.objects.filter(status = "approved").count()
+    
+    return Response({"approved": approved_proposals_count,"pending": pending_proposals_count,})
