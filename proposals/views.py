@@ -184,7 +184,7 @@ def add_review(request,id):
     operation_description='adds a list of questions to the proposal'
 )
 @api_view(['POST'])
-def createQuestions(request,tempid):
+def createQuestions(request):
     data = request.data
     serializer = serializers.QuestionSeriliazer(data=data,many=True)
     if serializer.is_valid():
