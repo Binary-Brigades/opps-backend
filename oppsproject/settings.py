@@ -110,12 +110,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'opps',
-        'USER': 'admin',
-        'PASSWORD': 'EL99mLVDPzNFztR2HSC2vLn6vEedCZer',
-        'HOST': 'dpg-cm3benmn7f5s73bn0at0-a.oregon-postgres.render.com',
+        'USER': 'omoshjoe02',
+        'PASSWORD': 'YZE8JHsDng1P',
+        'HOST': 'ep-blue-mud-a5i513b9.us-east-2.aws.neon.tech',
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
+# postgresql://omoshjoe02:YZE8JHsDng1P@ep-blue-mud-a5i513b9.us-east-2.aws.neon.tech/opps?sslmode=require
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
