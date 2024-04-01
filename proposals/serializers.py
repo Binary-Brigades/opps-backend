@@ -22,8 +22,10 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class AnswerSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.Answer
+        depth = 1
         fields = '__all__'
 
 
