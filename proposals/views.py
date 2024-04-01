@@ -110,12 +110,12 @@ def view_my_proposal_answers(request,id):
         template = proposal.template
         questions = models.Question.objects.filter(template=template)
         answers = models.Answer.objects.filter(proposal=proposal.pk)
-        quiz_serializer = serializers.QuestionSeriliazer(questions,many=True)
+        # quiz_serializer = serializers.QuestionSeriliazer(questions,many=True)
         ans_serializer = serializers.AnswerSerializer(answers,many=True)
             
         response = {
             'title': template.title,
-            'questions':quiz_serializer.data,
+            # 'questions':quiz_serializer.data,
             'answers': ans_serializer.data
         }
         return Response(response)
