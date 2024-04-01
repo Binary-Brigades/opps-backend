@@ -7,6 +7,7 @@ router.register('',views.TemplateViewSet,basename='template')
 
 urlpatterns = [
     path('template/',include(router.urls)),
+    path("assign1/",views.assignProposal),
     path('add_proposal/',views.create_proposal,name='add_proposal'),
     path('my_proposal/',views.get_my_proposals,name='my_proposals'),
     path('assign/',views.AssignmentApiView.as_view(),name='assign_proposals'),
