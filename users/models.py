@@ -52,7 +52,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     lastname = models.CharField(max_length=30,null=True,blank=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True)
     email = models.CharField(max_length=30)
-    role = models.CharField(choices=USER_ROLES,max_length=30,null=True,default='student',blank=True)
+    role = models.CharField(choices=USER_ROLES,max_length=30,null=True,default='proposer',blank=True)
     is_superuser = models.BooleanField(null=True)
     is_staff = models.BooleanField(null=True)
   

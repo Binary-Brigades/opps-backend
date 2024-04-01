@@ -201,11 +201,12 @@ def createQuestions(request):
 @api_view(['POST'])
 def add_answers(request):
     data = request.data
-    serializers = serializers.AnswerSerializer(data=data,many=True)
-    if serializers.is_valid():
-        serializers.save()
-        return Response(serializers.data)
-    return Response(serializers.errors)
+    print("data",data)
+    serializer = serializers.AnswerSerializer(data=data,many=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
     
 @api_view()
 def proposal_statistics(request):
