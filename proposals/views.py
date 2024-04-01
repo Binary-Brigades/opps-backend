@@ -205,14 +205,20 @@ def get_my_assignments(request):
 )
 @api_view(['POST'])
 def add_review(request,id):
-    data = request.data
-    data['reviewer'] = request.user.id
-    data['proposal'] = id
-    serializer = serializers.ReviewSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors)    
+    try:
+        data = request.data
+        data['reviewer'] = request.user.id
+        data['proposal'] = id
+        proposal = models.Proposal.objects.get(pk=id)
+        serializer = serializers.ReviewSerializer(data=data)
+        if serializer.is_valid():
+            proposal.status = "reviewed"
+            proposal.save()
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)   
+    except models.Proposal.DoesNotExist:
+        return Response({"message":"proposal does not exist!!"} status=status.HTTP_404_NOT_FOUND) 
 
 @swagger_auto_schema(
     method='POST',
