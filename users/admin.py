@@ -7,6 +7,10 @@ from rest_framework.authtoken.admin import TokenAdmin,TokenProxy
 admin.site.site_title = 'OPPS ADMINISTRATION SITE'
 admin.site.site_header = 'OPPS ADMINISTRATION'
 admin.site.index_title = 'OPPS ADMINISTRATION'
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = ["firstname","lastname","category","role","email"]
 # admin.site.name = 'mike'
-admin.site.register(User)
+admin.site.register(User,UserAdmin)
+
 # admin.site.unregister(TokenAdmin,TokenProxy)
