@@ -104,19 +104,23 @@ def assignProposal(request):
 )  
 @api_view(['GET'])
 def view_my_proposal_answers(request,id):
-    proposal = models.Proposal.objects.get(pk=id)
-    template = proposal.template
-    questions = models.Question.objects.filter(template=template)
-    answers = models.Answer.objects.filter(proposal=proposal.pk)
-    quiz_serializer = serializers.QuestionSeriliazer(questions,many=True)
-    ans_serializer = serializers.AnswerSerializer(answers,many=True)
-        
-    response = {
-        'title': template.title,
-        'questions':quiz_serializer.data,
-        'answers': ans_serializer.data
-    }
-    return Response(response)
+    try:
+        proposal = models.Proposal.objects.get(pk=id)
+        # proposal = get_object_or_404()
+        template = proposal.template
+        questions = models.Question.objects.filter(template=template)
+        answers = models.Answer.objects.filter(proposal=proposal.pk)
+        quiz_serializer = serializers.QuestionSeriliazer(questions,many=True)
+        ans_serializer = serializers.AnswerSerializer(answers,many=True)
+            
+        response = {
+            'title': template.title,
+            'questions':quiz_serializer.data,
+            'answers': ans_serializer.data
+        }
+        return Response(response)
+    except models.Proposal.DoesNotExist:
+        return Response({"message":"Proposal Does Not Exists"},status=status.HTTP_404_NOT_FOUND)
 
 @swagger_auto_schema(
     method='GET',
