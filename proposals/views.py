@@ -210,6 +210,7 @@ def add_review(request,id):
         data['reviewer'] = request.user.id
         data['proposal'] = id
         proposal = models.Proposal.objects.get(pk=id)
+        print(proposal)
         serializer = serializers.ReviewSerializer(data=data)
         if serializer.is_valid():
             proposal.status = "reviewed"
