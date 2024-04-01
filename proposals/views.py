@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view,permission_classes,authentication
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication
 from rest_framework.viewsets import ModelViewSet
+from rest_framework import status
 from rest_framework.generics import (ListCreateAPIView,CreateAPIView)
 from drf_yasg.utils import swagger_auto_schema
 
@@ -177,10 +178,20 @@ def get_proposal_review(request,id):
 @api_view(['GET'])
 def get_my_assignments(request):
     assignments = models.Assignment.objects.filter(reviewer=request.user.id)
-    serializer = serializers.AssignmentSerializer(assignments,many=True)
-    if serializer.data:
-        return Response(serializer.data)
-    return Response({'message':'You have no assignemnts at the moment!!'})
+    proposals = []
+    for assignment in assignments:
+        proposal = models.Proposal.objects.get(pk=assignment.proposal.pk)
+        ser = serializers.ProposalSerializer(proposal)
+        proposals.append(ser.data)
+    # 
+    if len(proposals)>1:
+        return Response(proposals,status=status.HTTP_200_OK)
+    return Response({"message":"No Assignments"},status=status.HTTP_404_NOT_FOUND)
+
+    # serializer = serializers.AssignmentSerializer(assignments,many=True)
+    # if serializer.data:
+    #     return Response(serializer.data)
+    # return Response({'message':'You have no assignemnts at the moment!!'})
 
 
 @swagger_auto_schema(
