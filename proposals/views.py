@@ -218,7 +218,7 @@ def add_review(request,id):
             return Response(serializer.data)
         return Response(serializer.errors)   
     except models.Proposal.DoesNotExist:
-        return Response({"message":"proposal does not exist!!"} status=status.HTTP_404_NOT_FOUND) 
+        return Response({"message":"proposal does not exist!!"} ,status=status.HTTP_404_NOT_FOUND) 
 
 @swagger_auto_schema(
     method='POST',
