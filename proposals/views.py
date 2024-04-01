@@ -201,6 +201,7 @@ def createQuestions(request):
 @api_view(['POST'])
 def add_answers(request):
     data = request.data
+    print("data",data)
     serializer = serializers.AnswerSerializer(data=data,many=True)
     if serializer.is_valid():
         serializer.save()
