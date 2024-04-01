@@ -64,13 +64,34 @@ def assign_proposal(request):
     cat = request.user.category
     print(cat)
     reviewers = models.User.objects.filter(category=cat).filter(role='reviewer')
-    proposals = models.Proposal.objects.filter(template__category = cat)
+    proposals = models.Proposal.objects.filter(assigned=False).filter(template__category = cat)
     proposals_serializer = serializers.ProposalSerializer(proposals,many=True)
     reviewers_serializer = UserDetailsSerializer(reviewers,many=True)
     return Response({
         'proposals':proposals_serializer.data,
         'reviewers':reviewers_serializer.data
     })
+
+@api_view(["POST"])
+def assignProposal(request):
+    data = request.data
+    proposal = models.Proposal.objects.get(pk=data["proposal"])
+    
+    reviewer = models.User.objects.get(pk=data["reviewer"])
+    # data = {
+    #     "proposal":proposal,
+    #     "reviewer": reviewer
+    # }
+    serializer = serializers.AssignmentSerializer(data=data)
+    if serializer.is_valid():
+
+        serializer.save()
+        proposal.assigned = True
+        proposal.save()
+        return Response(serializer.data)
+    print("proposal ",proposal)
+    print("reviewer ",reviewer)
+    return Response(serializer.errors)
 
 @swagger_auto_schema(
     method='GET',
