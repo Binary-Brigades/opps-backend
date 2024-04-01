@@ -233,5 +233,6 @@ def add_answers(request):
 def proposal_statistics(request):
     pending_proposals_count = models.Proposal.objects.filter(status = "pending").count()
     approved_proposals_count = models.Proposal.objects.filter(status = "approved").count()
+    reviewed_proposals_count = models.Proposal.objects.filter(status = "reviewed").count()
     
-    return Response({"approved": approved_proposals_count,"pending": pending_proposals_count,})
+    return Response({"approved": approved_proposals_count,"pending": pending_proposals_count,"reviewed":reviewed_proposals_count})
