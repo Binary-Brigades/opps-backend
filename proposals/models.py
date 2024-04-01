@@ -67,3 +67,7 @@ class Assignment(models.Model):
     
     class Meta:
         unique_together = ('proposal','reviewer')
+        
+
+    def __str__(self):
+        return f"{self.proposal} {self.reviewer}"
